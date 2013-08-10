@@ -1,0 +1,33 @@
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+response here: <p id="lblResponse">fill me in</p>
+
+<form name="input" action="http://127.0.0.1:1212/insert" method="post">
+    Username: <input type="text" name="username">
+    Password: <input type="text" name="password">
+    Email: <input type="text" name="email">
+    <input type="submit" value="Submit">
+</form>
+<script type="text/javascript" >
+    $(document).ready(function() {
+        $.ajax({
+            type: 'POST', // added,
+            url: 'localhost:1212/u',
+            data: '{"data": "TEST"}',
+            success: function (data) {
+                var ret = jQuery.parseJSON(data);
+                $('#lblResponse').html(ret.msg);
+            },
+            error: function (xhr, status, error) {
+                console.log('Error: ' + error.message);
+                $('#lblResponse').html('Error connecting to the server.');
+            }
+        });
+    });
+
+</script>
+</body>
+</html>
